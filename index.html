@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Gourmandise | Alta Cocina</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root{--wine:#722F37;--gold:#D4AF37;--text:#333;--bg:#f9f9f9}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:'Lato',sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
+        h1,h2,h3{font-family:'Playfair Display',serif;color:var(--wine)}
+        a{text-decoration:none;color:inherit;transition:0.3s}
+        .btn{display:inline-block;padding:12px 30px;border:2px solid var(--gold);color:var(--gold);text-transform:uppercase;font-weight:700;cursor:pointer}
+        .btn:hover{background:var(--gold);color:var(--wine)}
+        .btn-fill{background:var(--wine);color:white;border-color:var(--wine)}
+        .btn-fill:hover{background:#4a1c22}
+        header{background:white;box-shadow:0 2px 10px rgba(0,0,0,0.1);position:fixed;width:100%;z-index:1000}
+        .navbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 5%;max-width:1200px;margin:0 auto}
+        .logo{font-size:1.8rem;font-weight:700;color:var(--wine)}
+        .logo span{color:var(--gold)}
+        .nav-links{display:flex;gap:2rem}
+        .nav-links a{font-weight:700;text-transform:uppercase;font-size:0.9rem}
+        .nav-links a:hover{color:var(--gold)}
+        .hamburger{display:none;font-size:1.5rem;color:var(--wine);cursor:pointer}
+        .hero{height:100vh;background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;color:white}
+        .hero-content h1{font-size:3.5rem;color:var(--gold);text-shadow:2px 2px 4px rgba(0,0,0,0.5);margin-bottom:1rem}
+        .hero-content p{font-size:1.1rem;margin-bottom:2rem;max-width:600px;margin:0 auto}
+        section{padding:4rem 5%;max-width:1200px;margin:0 auto}
+        .section-title{text-align:center;margin-bottom:2rem}
+        .section-title h2{font-size:2rem;margin-bottom:0.5rem}
+        .section-title .divider{width:60px;height:3px;background:var(--gold);margin:0 auto}
+        .about-container{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+        .about-img img{width:100%;border-radius:5px;box-shadow:10px 10px 0px var(--gold)}
+        .menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+        .menu-item{background:white;padding:2rem;border:1px solid #eee;text-align:center;transition:0.3s}
+        .menu-item:hover{box-shadow:0 5px 15px rgba(0,0,0,0.1);transform:translateY(-5px);border-color:var(--gold)}
+        .price{color:var(--gold);font-weight:700;font-size:1.2rem;display:block;margin:1rem 0}
+        .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+        .gallery-item{overflow:hidden;height:200px}
+        .gallery-item img{width:100%;height:100%;object-fit:cover;transition:0.5s}
+        .gallery-item:hover img{transform:scale(1.1)}
+        .contact-container{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+        .contact-info p{margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+        .contact-info i{color:var(--gold);font-size:1.2rem}
+        form input,form textarea{width:100%;padding:10px;margin-bottom:1rem;border:1px solid #ddd;font-family:'Lato',sans-serif}
+        form textarea{height:100px;resize:none}
+        footer{background:var(--wine);color:white;padding:3rem 5% 1rem}
+        .footer-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
+        .footer-col h3{color:var(--gold);margin-bottom:1rem}
+        .social-links a{display:inline-flex;justify-content:center;align-items:center;width:40px;height:40px;background:rgba(255,255,255,0.1);border-radius:50%;margin-right:10px;color:var(--gold);font-size:1.2rem}
+        .social-links a:hover{background:var(--gold);color:var(--wine)}
+        .copyright{text-align:center;margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.1);font-size:0.9rem}
+        .float-wa{position:fixed;width:60px;height:60px;bottom:40px;right:40px;background:#25d366;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:2px 2px 3px #999;z-index:100;transition:0.3s}
+        .float-wa:hover{background:#128C7E;transform:scale(1.1)}
+        @media(max-width:768px){.hero-content h1{font-size:2.5rem}.about-container,.contact-container{grid-template-columns:1fr}.hamburger{display:block}.nav-links{position:absolute;top:70px;right:0;width:100%;background:white;flex-direction:column;align-items:center;padding:2rem 0;display:none;box-shadow:0 5px 10px rgba(0,0,0,0.1)}.nav-links.active{display:flex}}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">La <span>Gourmandise</span></div>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#contacto" class="btn btn-fill" style="padding:8px 20px;color:white;">Reservar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Experiencia Culinaria Única</h1>
+            <p>Donde el sabor se encuentra con la elegancia. Disfruta de la mejor gastronomía.</p>
+            <a href="#menu" class="btn btn-fill">Ver Menú</a>
+            <a href="#contacto" class="btn" style="border-color:white;color:white;margin-left:10px;">Reservar</a>
+        </div>
+    </section>
+
+    <section id="nosotros">
+        <div class="section-title"><h2>Nuestra Historia</h2><div class="divider"></div></div>
+        <div class="about-container">
+            <div class="about-text">
+                <h3>Pasión por el detalle</h3>
+                <p>En <strong>La Gourmandise</strong>, creemos que la comida es un arte. Fundado en 2010, combinamos técnicas clásicas con ingredientes locales frescos.</p>
+                <br><p>Nuestro Chef Ejecutivo selecciona personalmente cada ingrediente para garantizar sabor y presentación.</p>
+                <br><a href="#" class="btn btn-fill">Conoce al Chef</a>
+            </div>
+            <div class="about-img"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Interior"></div>
+        </div>
+    </section>
+
+    <section id="menu" style="background-color:#fff;">
+        <div class="section-title"><h2>Platos Destacados</h2><div class="divider"></div></div>
+        <div class="menu-grid">
+            <div class="menu-item"><h3>Filet Mignon</h3><span class="price">$45.00</span><p>Carne de res tierna a la parrilla con salsa de vino tinto.</p></div>
+            <div class="menu-item"><h3>Salmón Real</h3><span class="price">$38.00</span><p>Salmón noruego al horno con costra de hierbas.</p></div>
+            <div class="menu-item"><h3>Risotto de Setas</h3><span class="price">$32.00</span><p>Arroz arborio cremoso con setas silvestres.</p></div>
+            <div class="menu-item"><h3>Tarta de Queso</h3><span class="price">$12.00</span><p>Clásica tarta de queso con frutos rojos.</p></div>
+        </div>
+        <div style="text-align:center;margin-top:2rem"><a href="#" class="btn btn-fill">Ver Menú Completo</a></div>
+    </section>
+
+    <section id="galeria">
+        <div class="section-title"><h2>Galería</h2><div class="divider"></div></div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Comida 1"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Comida 2"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Comida 3"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Comida 4"></div>
+        </div>
+    </section>
+
+    <section id="contacto" style="background-color:#fff;">
+        <div class="section-title"><h2>Contacto</h2><div class="divider"></div></div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Visítanos</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, Ciudad Gourmet</p>
+                <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                <p><i class="fas fa-envelope"></i> reservas@lagourmandise.com</p>
+                <p><i class="fas fa-clock"></i> Mar - Dom: 13:00 - 23:00</p>
+            </div>
+            <form>
+                <input type="text" placeholder="Nombre" required>
+                <input type="email" placeholder="Email" required>
+                <input type="tel" placeholder="Teléfono">
+                <textarea placeholder="Mensaje o Reserva"></textarea>
+                <button type="submit" class="btn btn-fill">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>La Gourmandise</h3>
+                <p>Alta cocina en un ambiente exclusivo. Reservas recomendadas.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Enlaces</h3>
+                <ul><li><a href="#inicio">Inicio</a></li><li><a href="#menu">Menú</a></li><li><a href="#contacto">Contacto</a></li></ul>
+            </div>
+            <div class="footer-col">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/1234567890" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">© 2023 La Gourmandise. Todos los derechos reservados.</div>
+    </footer>
+
+    <a href="https://wa.me/1234567890" class="float-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        document.getElementById('hamburger').addEventListener('click',function(){
+            document.getElementById('nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
